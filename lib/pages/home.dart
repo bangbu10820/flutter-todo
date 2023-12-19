@@ -1,51 +1,34 @@
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      appBar: AppBar(title: const Text("Home Page")),
+      body: ListView.builder(
+        itemBuilder: (context, index) => ListTile(
+          title: Text(mockTasks[index].title),
+          subtitle: Text(mockTasks[index].subTitle),
         ),
+        itemCount: mockTasks.length,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+final List<TodoTask> mockTasks = [
+  TodoTask(title: 'Home work', subTitle: 'Doing home work for tomorrow'),
+  TodoTask(title: 'Play Game', subTitle: 'Play game with bros'),
+  TodoTask(title: 'Chore', subTitle: 'Complete housework'),
+  TodoTask(title: 'Learning Japanese', subTitle: 'Learn Japanese'),
+  TodoTask(title: 'Take motorcycle exam', subTitle: 'Try to get A2'),
+];
+
+class TodoTask {
+  String title;
+  String subTitle;
+
+  TodoTask({required this.title, required this.subTitle});
 }
