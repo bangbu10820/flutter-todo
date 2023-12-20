@@ -14,6 +14,11 @@ class MyHomePage extends StatelessWidget {
         ),
         itemCount: mockTasks.length,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
