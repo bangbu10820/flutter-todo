@@ -1,34 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/provider_models/todo_list_model.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Home Page")),
-      body: ListView.builder(
-        itemBuilder: (context, index) => ListTile(
-          title: Text(mockTasks[index].title),
-          subtitle: Text(mockTasks[index].subTitle),
+    return ChangeNotifierProvider(
+      create: (context) => TodoListModel(),
+      builder: (context, child) => Scaffold(
+        appBar: AppBar(title: const Text("Home Page")),
+        body: Consumer<TodoListModel>(
+          builder: (context, list, child) {
+            return ListView.builder(
+              itemBuilder: (context, index) => ListTile(
+                title: Text(list.todos[index].title),
+                subtitle: Text(list.todos[index].descriptions),
+              ),
+              itemCount: list.todos.length,
+            );
+          },
         ),
-        itemCount: mockTasks.length,
       ),
     );
   }
-}
-
-final List<TodoTask> mockTasks = [
-  TodoTask(title: 'Home work', subTitle: 'Doing home work for tomorrow'),
-  TodoTask(title: 'Play Game', subTitle: 'Play game with bros'),
-  TodoTask(title: 'Chore', subTitle: 'Complete housework'),
-  TodoTask(title: 'Learning Japanese', subTitle: 'Learn Japanese'),
-  TodoTask(title: 'Take motorcycle exam', subTitle: 'Try to get A2'),
-];
-
-class TodoTask {
-  String title;
-  String subTitle;
-
-  TodoTask({required this.title, required this.subTitle});
 }
