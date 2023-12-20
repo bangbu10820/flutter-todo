@@ -14,6 +14,14 @@ class MyHomePage extends StatelessWidget {
         ),
         itemCount: mockTasks.length,
       ),
+      persistentFooterButtons: [
+        Center(
+          child: ElevatedButton(
+            onPressed: (){},
+            child: Text('+'),
+          ),
+        ),
+      ],
     );
   }
 }
