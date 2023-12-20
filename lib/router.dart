@@ -20,7 +20,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: ScreenPaths.create,
       builder: (BuildContext context, GoRouterState state) {
-        return const Placeholder();
+        return const Placeholder(); // TODO: replace this with real screen
       },
     ),
   ],
