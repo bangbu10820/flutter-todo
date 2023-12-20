@@ -14,14 +14,11 @@ class MyHomePage extends StatelessWidget {
         ),
         itemCount: mockTasks.length,
       ),
-      persistentFooterButtons: [
-        Center(
-          child: ElevatedButton(
-            onPressed: (){},
-            child: Text('+'),
-          ),
-        ),
-      ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
