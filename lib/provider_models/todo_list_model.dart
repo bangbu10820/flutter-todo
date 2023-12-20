@@ -8,7 +8,7 @@ class TodoListModel extends ChangeNotifier {
   final List<Todo> _todos = [];
 
   /// An unmodifiable view of the items in the cart.
-  UnmodifiableListView<Todo> get todo => UnmodifiableListView(_todos);
+  UnmodifiableListView<Todo> get todos => UnmodifiableListView(_todos);
 
   /// Adds [todo] to list. This and [removeAll] are the only ways to modify the
   /// list from the outside.
