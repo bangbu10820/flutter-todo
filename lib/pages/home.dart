@@ -8,29 +8,24 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TodoListModel>(
-      builder: (context, list, child) {
-        return Scaffold(
-          appBar: AppBar(title: const Text("Home Page")),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              GoRouter.of(context).push('/create');
-            },
-            child: const Icon(Icons.add),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          body: ListView.builder(
+    return Scaffold(
+        appBar: AppBar(title: const Text("Home Page")),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            GoRouter.of(context).push('/create');
+          },
+          child: const Icon(Icons.add),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: Consumer<TodoListModel>(
+          builder: (context, list, child) {
+          return ListView.builder(
             itemBuilder: (context, index) => ListTile(
               title: Text(list.todos[index].title),
               subtitle: Text(list.todos[index].descriptions),
             ),
             itemCount: list.todos.length,
-          ),
-        );
-      },
-    );
+          );
+        }));
   }
 }
-
-

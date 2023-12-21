@@ -21,9 +21,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: ScreenPaths.create,
       builder: (BuildContext context, GoRouterState state) {
-        return  AddNote(); 
+        return  const AddNote(); 
       },
     ),
-    
   ],
 );
