@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/provider_models/todo_list_model.dart';
+import 'package:flutter_todo/router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -23,7 +25,10 @@ class MyHomePage extends StatelessWidget {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          backgroundColor: Colors.pinkAccent,
+          onPressed: () {
+            context.go(ScreenPaths.create);
+          },
           child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
