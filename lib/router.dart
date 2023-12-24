@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/pages/add_note_page.dart';
 import 'package:flutter_todo/pages/home.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,7 +21,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: ScreenPaths.create,
       builder: (BuildContext context, GoRouterState state) {
-        return const Placeholder(); // TODO: replace this with real screen
+        return  const AddNote(); 
       },
     ),
   ],
