@@ -13,7 +13,6 @@ class _CreateToDoState extends State<CreateToDoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.pinkAccent,
         title: const Text('Create'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -52,7 +51,6 @@ class _CreateToDoState extends State<CreateToDoPage> {
         child: SizedBox(
           width: double.infinity,
           child: FloatingActionButton(
-            backgroundColor: Colors.pinkAccent,
             onPressed: () {},
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),

@@ -25,7 +25,6 @@ class MyHomePage extends StatelessWidget {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.pinkAccent,
           onPressed: () {
             context.go(ScreenPaths.create);
           },
