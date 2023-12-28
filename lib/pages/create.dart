@@ -2,13 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/router.dart';
 import 'package:go_router/go_router.dart';
 
-class CreateToDoPage extends StatefulWidget {
+class CreateToDoPage extends StatelessWidget {
   const CreateToDoPage({super.key});
-  @override
-  State<CreateToDoPage> createState() => _CreateToDoState();
-}
-
-class _CreateToDoState extends State<CreateToDoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,10 +29,10 @@ class _CreateToDoState extends State<CreateToDoPage> {
               const SizedBox(
                 height: 16,
               ),
-              const TextField(
+              TextFormField(
                 minLines: 5,
                 maxLines: null,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Description',
                   alignLabelWithHint: true,
                 ),
