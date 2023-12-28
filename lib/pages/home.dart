@@ -26,7 +26,7 @@ class MyHomePage extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.go(ScreenPaths.create);
+            context.push(ScreenPaths.create);
           },
           child: const Icon(Icons.add),
         ),

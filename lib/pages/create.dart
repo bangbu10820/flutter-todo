@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/models/todo.dart';
+import 'package:flutter_todo/provider_models/todo_list_model.dart';
 import 'package:flutter_todo/router.dart';
 import 'package:go_router/go_router.dart';
 
@@ -6,15 +8,12 @@ class CreateToDoPage extends StatelessWidget {
   const CreateToDoPage({super.key});
   @override
   Widget build(BuildContext context) {
+    TextEditingController titleController = TextEditingController();
+    TextEditingController contentController = TextEditingController();
+    TodoListModel todo = TodoListModel();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            context.go(ScreenPaths.home);
-          },
-        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -22,6 +21,7 @@ class CreateToDoPage extends StatelessWidget {
           child: Column(
             children: [
               TextFormField(
+                controller: titleController,
                 decoration: const InputDecoration(
                   labelText: 'Title',
                 ),
@@ -30,6 +30,7 @@ class CreateToDoPage extends StatelessWidget {
                 height: 16,
               ),
               TextFormField(
+                controller: contentController,
                 minLines: 5,
                 maxLines: null,
                 decoration: const InputDecoration(
@@ -46,7 +47,12 @@ class CreateToDoPage extends StatelessWidget {
         child: SizedBox(
           width: double.infinity,
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              todo.add(Todo(
+                  title: titleController.text,
+                  descriptions: contentController.text));
+              context.go(ScreenPaths.home);
+            },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
