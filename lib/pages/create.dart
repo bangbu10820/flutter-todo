@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/models/todo.dart';
 import 'package:flutter_todo/provider_models/todo_list_model.dart';
-import 'package:flutter_todo/router.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class CreateToDoPage extends StatelessWidget {
   const CreateToDoPage({super.key});
@@ -10,7 +10,7 @@ class CreateToDoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController titleController = TextEditingController();
     TextEditingController contentController = TextEditingController();
-    TodoListModel todo = TodoListModel();
+    var list = context.read<TodoListModel>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create'),
@@ -48,10 +48,10 @@ class CreateToDoPage extends StatelessWidget {
           width: double.infinity,
           child: FloatingActionButton(
             onPressed: () {
-              todo.add(Todo(
+              list.add(Todo(
                   title: titleController.text,
                   descriptions: contentController.text));
-              context.go(ScreenPaths.home);
+              context.pop();
             },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
