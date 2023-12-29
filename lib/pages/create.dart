@@ -32,6 +32,7 @@ class CreateToDoPage extends StatelessWidget {
               TextFormField(
                 controller: contentController,
                 minLines: 5,
+                maxLines: null,
                 decoration: const InputDecoration(
                   labelText: 'Description',
                   alignLabelWithHint: true,
