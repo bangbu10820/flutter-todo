@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/models/todo.dart';
 import 'package:flutter_todo/provider_models/database_model.dart';
+import 'package:flutter_todo/provider_models/todo_list_model.dart';
 import 'package:flutter_todo/router.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,8 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final db = context.watch<DatabaseModel>().databaseHelper;
+    final list = context.watch<TodoListModel>();
+    list.removeAll();
     return Scaffold(
       appBar: AppBar(title: const Text("Home Page")),
       body: FutureBuilder(
@@ -36,12 +39,16 @@ class MyHomePage extends StatelessWidget {
                 child: Text('Không có todo nào!'),
               );
             }
+            for (var element in todos) {
+              list.add(Todo(
+                  title: element.title, descriptions: element.descriptions));
+            }
             return ListView.builder(
-              itemCount: todos.length,
+              itemCount: list.todos.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(todos[index].title),
-                  subtitle: Text(todos[index].descriptions),
+                  title: Text(list.todos[index].title),
+                  subtitle: Text(list.todos[index].descriptions),
                 );
               },
             );

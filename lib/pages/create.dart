@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/models/todo.dart';
 import 'package:flutter_todo/provider_models/database_model.dart';
+import 'package:flutter_todo/provider_models/todo_list_model.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +12,7 @@ class CreateToDoPage extends StatelessWidget {
     TextEditingController titleController = TextEditingController();
     TextEditingController contentController = TextEditingController();
     final db = context.watch<DatabaseModel>().databaseHelper;
+    final list = context.watch<TodoListModel>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create'),
@@ -52,9 +54,9 @@ class CreateToDoPage extends StatelessWidget {
                   title: titleController.text,
                   descriptions: contentController.text);
               db.insertTodo(newTodo);
-              // list.add(Todo(
-              //     title: titleController.text,
-              //     descriptions: contentController.text));
+              list.add(Todo(
+                  title: titleController.text,
+                  descriptions: contentController.text));
               context.pop();
             },
             shape: RoundedRectangleBorder(
