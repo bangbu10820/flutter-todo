@@ -8,6 +8,9 @@ class TodoListModel extends ChangeNotifier {
   /// Internal, private state of the todo list.
   final List<Todo> _todos = [];
 
+  /// An unmodifiable view of the items in the cart.
+  UnmodifiableListView<Todo> get todos => UnmodifiableListView(_todos);
+
   TodoListModel() {
     _init();
   }
@@ -17,9 +20,6 @@ class TodoListModel extends ChangeNotifier {
     _todos.addAll(todos);
     notifyListeners();
   }
-
-  /// An unmodifiable view of the items in the cart.
-  UnmodifiableListView<Todo> get todos => UnmodifiableListView(_todos);
 
   /// Adds [todo] to list. This and [removeAll] are the only ways to modify the
   /// list from the outside.
