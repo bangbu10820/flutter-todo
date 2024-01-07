@@ -2,10 +2,10 @@ import 'package:flutter_todo/models/todo.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseHelper {
-  late Database _database;
+abstract class DatabaseHelper {
+  static late Database _database;
 
-  Future<void> initDb() async {
+  static Future<void> initDb() async {
     String path = await getDatabasesPath();
     String dbPath = join(path, 'Todo.db');
     _database =
@@ -15,11 +15,11 @@ class DatabaseHelper {
     });
   }
 
-  Future<int> insertTodo(Todo todo) async {
+  static Future<int> insertTodo(Todo todo) async {
     return await _database.insert('todo', todo.toMap());
   }
 
-  Future<List<Todo>> getTodos() async {
+  static Future<List<Todo>> getTodos() async {
     List<Map<String, dynamic>> maps = await _database.query('todo');
     return List.generate(maps.length, (index) {
       return Todo(
