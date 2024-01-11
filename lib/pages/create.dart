@@ -10,11 +10,9 @@ class CreateToDoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController titleController = TextEditingController();
     TextEditingController contentController = TextEditingController();
-    var list = context.read<TodoListModel>();
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create'),
-      ),
+      appBar: AppBar(title: const Text('Create')),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -22,13 +20,9 @@ class CreateToDoPage extends StatelessWidget {
             children: [
               TextFormField(
                 controller: titleController,
-                decoration: const InputDecoration(
-                  labelText: 'Title',
-                ),
+                decoration: const InputDecoration(labelText: 'Title'),
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: contentController,
                 minLines: 5,
@@ -48,9 +42,12 @@ class CreateToDoPage extends StatelessWidget {
           width: double.infinity,
           child: FloatingActionButton(
             onPressed: () {
-              list.add(Todo(
-                  title: titleController.text,
-                  descriptions: contentController.text));
+              context.read<TodoListModel>().add(
+                    Todo(
+                      title: titleController.text,
+                      descriptions: contentController.text,
+                    ),
+                  );
               context.pop();
             },
             shape: RoundedRectangleBorder(
