@@ -58,7 +58,7 @@ class EditToDoPage extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            child: const Text('Edit'),
+            child: const Text('Save'),
           ),
         ),
       ),
