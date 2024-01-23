@@ -25,6 +25,11 @@ abstract class DatabaseHelper {
         where: 'id = ?', whereArgs: [todo.id]);
   }
 
+  static Future<int> deleteTodo(Todo todo) async {
+    return await _database
+        .delete('todo', where: 'id = ?', whereArgs: [todo.id]);
+  }
+
   static Future<List<Todo>> getTodos() async {
     List<Map<String, dynamic>> maps = await _database.query('todo');
     return List.generate(maps.length, (index) {

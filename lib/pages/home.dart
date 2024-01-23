@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_todo/models/todo.dart';
 import 'package:flutter_todo/provider_models/todo_list_model.dart';
 import 'package:flutter_todo/router.dart';
 import 'package:go_router/go_router.dart';
@@ -14,16 +16,45 @@ class MyHomePage extends StatelessWidget {
       body: Consumer<TodoListModel>(
         builder: (context, list, child) {
           return ListView.builder(
-            itemBuilder: (context, index) => ListTile(
-              title: Text(list.todos[index].title),
-              subtitle: Text(
-                list.todos[index].descriptions,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
+            itemBuilder: (context, index) => Slidable(
+              key: ValueKey(list.todos[index].id),
+              endActionPane: ActionPane(
+                motion: const ScrollMotion(),
+                children: [
+                  SlidableAction(
+                    onPressed: (context) => {
+                      context.push(ScreenPaths.edit, extra: list.todos[index])
+                    },
+                    backgroundColor: const Color.fromARGB(255, 0, 0, 255),
+                    foregroundColor: Colors.white,
+                    icon: Icons.edit,
+                    label: 'Edit',
+                  ),
+                  SlidableAction(
+                    onPressed: (context) => {
+                      context.read<TodoListModel>().delete(
+                            Todo(
+                              id: list.todos[index].id,
+                              title: list.todos[index].title,
+                              descriptions: list.todos[index].descriptions,
+                            ),
+                          )
+                    },
+                    backgroundColor: const Color.fromARGB(255, 255, 0, 0),
+                    foregroundColor: Colors.white,
+                    icon: Icons.delete,
+                    label: 'Delete',
+                  ),
+                ],
               ),
-              onTap: () {
-                context.push(ScreenPaths.edit, extra: list.todos[index]);
-              },
+              child: ListTile(
+                title: Text(list.todos[index].title),
+                subtitle: Text(
+                  list.todos[index].descriptions,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
             ),
             itemCount: list.todos.length,
           );

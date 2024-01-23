@@ -41,6 +41,12 @@ class TodoListModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void delete(Todo todo) {
+    _todos.remove(todo);
+    DatabaseHelper.deleteTodo(todo);
+    notifyListeners();
+  }
+
   /// Removes all items from the list.
   void removeAll() {
     _todos.clear();
