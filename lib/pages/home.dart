@@ -16,7 +16,14 @@ class MyHomePage extends StatelessWidget {
           return ListView.builder(
             itemBuilder: (context, index) => ListTile(
               title: Text(list.todos[index].title),
-              subtitle: Text(list.todos[index].descriptions),
+              subtitle: Text(
+                list.todos[index].descriptions,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+              onTap: () {
+                context.push(ScreenPaths.edit, extra: list.todos[index]);
+              },
             ),
             itemCount: list.todos.length,
           );

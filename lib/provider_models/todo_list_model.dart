@@ -30,6 +30,17 @@ class TodoListModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void update(Todo todo) {
+    for (var element in _todos) {
+      if (element.id == todo.id) {
+        element.title = todo.title;
+        element.descriptions = todo.descriptions;
+      }
+    }
+    DatabaseHelper.updateTodo(todo);
+    notifyListeners();
+  }
+
   /// Removes all items from the list.
   void removeAll() {
     _todos.clear();

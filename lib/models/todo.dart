@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Todo {
-  final bool complete;
-  final int id;
-  final String title;
-  final String descriptions;
+  bool complete;
+  int id;
+  String title;
+  String descriptions;
 
   Todo({
     this.complete = false,
