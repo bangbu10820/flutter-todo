@@ -16,43 +16,46 @@ class MyHomePage extends StatelessWidget {
       body: Consumer<TodoListModel>(
         builder: (context, list, child) {
           return ListView.builder(
-            itemBuilder: (context, index) => Slidable(
-              key: ValueKey(list.todos[index].id),
-              endActionPane: ActionPane(
-                motion: const ScrollMotion(),
-                children: [
-                  SlidableAction(
-                    onPressed: (context) => {
-                      context.push(ScreenPaths.edit, extra: list.todos[index])
-                    },
-                    backgroundColor: const Color.fromARGB(255, 0, 0, 255),
-                    foregroundColor: Colors.white,
-                    icon: Icons.edit,
-                    label: 'Edit',
+            itemBuilder: (context, index) => SlidableAutoCloseBehavior(
+              child: Slidable(
+                key: ValueKey(list.todos[index].id),
+                groupTag: '0',
+                endActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: (context) => {
+                        context.push(ScreenPaths.edit, extra: list.todos[index])
+                      },
+                      backgroundColor: const Color.fromARGB(255, 0, 0, 255),
+                      foregroundColor: Colors.white,
+                      icon: Icons.edit,
+                      label: 'Edit',
+                    ),
+                    SlidableAction(
+                      onPressed: (context) => {
+                        context.read<TodoListModel>().delete(
+                              Todo(
+                                id: list.todos[index].id,
+                                title: list.todos[index].title,
+                                descriptions: list.todos[index].descriptions,
+                              ),
+                            )
+                      },
+                      backgroundColor: const Color.fromARGB(255, 255, 0, 0),
+                      foregroundColor: Colors.white,
+                      icon: Icons.delete,
+                      label: 'Delete',
+                    ),
+                  ],
+                ),
+                child: ListTile(
+                  title: Text(list.todos[index].title),
+                  subtitle: Text(
+                    list.todos[index].descriptions,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
-                  SlidableAction(
-                    onPressed: (context) => {
-                      context.read<TodoListModel>().delete(
-                            Todo(
-                              id: list.todos[index].id,
-                              title: list.todos[index].title,
-                              descriptions: list.todos[index].descriptions,
-                            ),
-                          )
-                    },
-                    backgroundColor: const Color.fromARGB(255, 255, 0, 0),
-                    foregroundColor: Colors.white,
-                    icon: Icons.delete,
-                    label: 'Delete',
-                  ),
-                ],
-              ),
-              child: ListTile(
-                title: Text(list.todos[index].title),
-                subtitle: Text(
-                  list.todos[index].descriptions,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
                 ),
               ),
             ),
