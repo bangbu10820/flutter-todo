@@ -42,7 +42,12 @@ class TodoListModel extends ChangeNotifier {
   }
 
   void delete(Todo todo) {
-    _todos.remove(todo);
+    for (var element in _todos) {
+      if (element.id == todo.id) {
+        _todos.remove(element);
+        break;
+      }
+    }
     DatabaseHelper.deleteTodo(todo);
     notifyListeners();
   }
