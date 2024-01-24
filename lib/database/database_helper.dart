@@ -19,6 +19,16 @@ abstract class DatabaseHelper {
     return await _database.insert('todo', todo.toMap());
   }
 
+  static Future<int> updateTodo(Todo todo) async {
+    return await _database.update(
+        'todo', {'title': todo.title, 'descriptions': todo.descriptions},
+        where: 'id = ?', whereArgs: [todo.id]);
+  }
+
+  static Future<int> deleteTodo(int id) async {
+    return await _database.delete('todo', where: 'id = ?', whereArgs: [id]);
+  }
+
   static Future<List<Todo>> getTodos() async {
     List<Map<String, dynamic>> maps = await _database.query('todo');
     return List.generate(maps.length, (index) {
