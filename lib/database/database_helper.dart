@@ -25,9 +25,8 @@ abstract class DatabaseHelper {
         where: 'id = ?', whereArgs: [todo.id]);
   }
 
-  static Future<int> deleteTodo(Todo todo) async {
-    return await _database
-        .delete('todo', where: 'id = ?', whereArgs: [todo.id]);
+  static Future<int> deleteTodo(int id) async {
+    return await _database.delete('todo', where: 'id = ?', whereArgs: [id]);
   }
 
   static Future<List<Todo>> getTodos() async {

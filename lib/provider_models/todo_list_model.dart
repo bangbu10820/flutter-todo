@@ -48,7 +48,7 @@ class TodoListModel extends ChangeNotifier {
         break;
       }
     }
-    DatabaseHelper.deleteTodo(todo);
+    DatabaseHelper.deleteTodo(todo.id);
     notifyListeners();
   }
 
