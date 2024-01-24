@@ -31,10 +31,10 @@ class TodoListModel extends ChangeNotifier {
   }
 
   void update(Todo todo) {
-    for (var element in _todos) {
-      if (element.id == todo.id) {
-        element.title = todo.title;
-        element.descriptions = todo.descriptions;
+    for (int i = 0; i < _todos.length; i++) {
+      if (_todos[i].id == todo.id) {
+        _todos.remove(_todos[i]);
+        _todos.insert(i, todo);
       }
     }
     DatabaseHelper.updateTodo(todo);
